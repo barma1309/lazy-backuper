@@ -1,6 +1,7 @@
 # Backup NAS
 import os, re
 import subprocess
+import datetime
 #from shlex import quote
 
 import pyfiglet  # Banner
@@ -24,7 +25,7 @@ print(ascii_banner)
 
 z = os.name
 # print(z)
-print("Текущая директория:", os.getcwd())
+print("Current directory:", os.getcwd())
 
 ftp_dir = '/mnt/4_1c-ftp/'
 print(f"Path to source directory parsing is: {ftp_dir} ")
@@ -60,15 +61,16 @@ def copy_date_month(month, src_dir, dst_dir, year_backup) -> None:
     month_dst_dir = dst_dir + str(key_year) + '/' + str(month)
     print(f'\n * Destination path is:{month_dst_dir}')
     print(f'\n * Checking destination path....')
+    
     if not os.path.exists(dst_dir):
         print(f'\n * Creating destination path: {month_dst_dir} ...')
         # os.mkdir(month_dst_dir)
     else:
         print(f'\nDestination path: {month_dst_dir} - Exist')
     print(f'* Preparing for copy files.... from {src_dir} to {month_dst_dir}')
+    
     # Forming list files witch should be copy
-    # распечатать все файлы и папки рекурсивно
-
+    
     if month < 10:
         month = "0" + str(month)
 
