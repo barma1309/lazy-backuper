@@ -26,6 +26,8 @@ args = parser.parse_args()
 ascii_banner = pyfiglet.figlet_format("BaCKuPER 1.05")
 print(ascii_banner)
 
+#TODO
+# check OS
 #z = os.name
 # print(z)
 print("Current Folder :", os.getcwd())
@@ -41,6 +43,8 @@ print(f'------ Version {version_script}-----')
 
 
 # DEBUG MODE
+# TODO:
+# make normal logging
 def debug(arg_4_print):
     # Printing variable
     if args.debug == 1:
@@ -65,9 +69,11 @@ def copy_date_month(month: str, src_dir: str, dst_dir: str, year_backup: datetim
     :param dst_dir:
     :param year_backup:
     """
+    
     list_files_for_copy = []
     key_year = year_backup
-    key_time = '21'
+    #TODO - make few variants of key_time    
+    key_time = '04'
     key_date = ('01', '04', '05', '09', 10, 14, 15, 19, 20, 24, 25, 28)
 
     if int(month) < 10:
@@ -105,7 +111,7 @@ def copy_date_month(month: str, src_dir: str, dst_dir: str, year_backup: datetim
                     # list_files_for_copy.append(filename)
 
                     # Move
-                    # call_rsync_cmd = 'rsync -zvh --remove-source-files --progress '+ftp_dir+str(filename)+' '+str(long_storage)+str(key_year)+'/'+str(month)+'/'
+                    # call_rsync_cmd = 'rsync  --delete-after --progress -zvhr '+ftp_dir+str(filename)+' '+str(long_storage)+str(key_year)+'/'+str(month)+'/'
 
                     # Copy
                     file_string_name1 = filename.replace("(","\(")
