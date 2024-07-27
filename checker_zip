@@ -1,0 +1,28 @@
+##!/bin/sh 
+
+
+# Specify the root directory
+#root_directory="/path/to/your/directory"
+root_directory=$1
+
+# Check if the root directory exists
+if [ ! -d "$root_directory" ]; then
+    echo "Error: Directory does not exist."
+        exit 1
+fi
+
+# Use 'find' to locate all zip files recursively
+find "$root_directory" -type f -name "*.zip" | while read -r file; do
+    # Test the integrity of the zip file
+    unzip -t "$file" > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "Success: $file is a valid zip file."
+    else
+        echo "Error: $file is not a valid zip file or is corrupted."
+	TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+	echo "$TIMESTAMP: corrupted file:$file">consistency_log.txt
+	rm $file
+
+    fi
+done
+
